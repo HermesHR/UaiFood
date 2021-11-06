@@ -1,6 +1,6 @@
 import environ
 
-from uaifood.settings.base import *
+from uaifood.settings import *
 
 env = environ.Env()
 

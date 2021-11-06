@@ -83,7 +83,7 @@ DATABASES = {
         'NAME': 'uaifood',
         'PORT': 5432,
         'USER': 'hermes',
-        'PASSWORD': '1234',
+        'PASSWORD': 'digital',
         'HOST': '127.0.0.1'
     }
 }
@@ -142,3 +142,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+    
