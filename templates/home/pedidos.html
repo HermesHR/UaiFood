@@ -1,0 +1,46 @@
+<div class="col-xl-8">
+  <div class="card">
+    <div class="card-header border-0">
+      <div class="row align-items-center">
+        <div class="col">
+          <h3 class="mb-0">Pedidos</h3>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <!-- Projects table -->
+      <table class="table align-items-center table-flush">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">RESUMO</th>
+            <th scope="col">MESA</th>
+            <th scope="col">VALOR</th>
+            <th scope="col">STATUS</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for pedido in pedidos %}
+              <tr>
+                <th scope="row">
+                  {{ pedido.id }}
+                </th>
+                <td>
+                  {{ pedido.itens_pedido.count }} Itens
+                </td>
+                <td>
+                  {{ pedido.get_mesa_display }}
+                </td>
+                <td>
+                  {{ pedido.get_total_pedido }}
+                </td>
+                <td>
+                  {{ pedido.get_status_display }}
+                </td>
+              </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
