@@ -1,0 +1,103 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+
+{% block title %} Cardápio {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<!-- Header -->
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Page content -->
+<div class="container-fluid mt--6">
+  <div class="row">
+
+    <div class="col-xl-10">
+      <div class="card">
+        <div class="card-header border-0">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="mb-0">Financeiro</h3>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <!-- Projects table -->
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">PEDIDO</th>
+                <th scope="col">VALOR</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for caixa in caixas %}
+                  <tr>
+                    <th scope="row">
+                      {{ caixa.id }}
+                    </th>
+                    <td>
+                      {{ caixa.pedido.id }}
+                    </td>
+                    <td>
+                      {{ caixa.valor }}
+                    </td>
+                  </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+   
+    <div class="col-xl-5" style='margin-left: 445px;' >
+      <div class="card">
+        <div class="card-header border-0">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3 class="mb-0">Total Geral</h3>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+         
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">VALOR</th>
+                <th scope="col"></th>
+               
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  {{total.total_pagamentos}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    
+    </div>
+  </div>
+
+  {% include "includes/footer.html" %}
+
+</div>
+
+{% endblock content %}

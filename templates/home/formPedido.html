@@ -1,0 +1,103 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+
+{% block title %} Cardápio {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<!-- Header -->
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Page content -->
+<div class="container-fluid mt--6">
+  <div class="row">
+    <div class="col-xl-8 order-xl-1">
+      <div class="card">
+        <div class="card-header">
+          <div class="row align-items-center">
+            <div class="col-12">
+              <h3 class="mb-0">Lançar Pedido </h3>
+              <a href="{% url 'index' %}" class="btn btn-sm  btn-primary" style="font-size: 15px; padding-left: 20px; padding-right: 20px; float: right; "> Voltar </a>
+            </div>
+            
+          </div>
+        </div>
+        <div class="card-body">
+          <form method="POST" >
+            {% csrf_token %}
+            <h6 class="heading-small text-muted mb-4">Informações do pedido</h6>
+            {% for field in form %}
+            <p>{{ field.label_tag }} {{ field }} </p>
+            {% if form.errors %}
+            {% for error in field.errors %}
+            <p class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </p>
+            {% endfor %}
+            {% endif %}
+            {% if field.help_text %}
+            <p class="form-text">{{ field.help_text|safe }}</p>
+            {% endif %}
+            {% endfor %}
+
+            {{ form_items.management_form }}
+            <div id="form_set">
+                {% for form_item in form_items.forms %}
+                    <table class='no_error'>
+                        {{ form_item.as_table }}
+                    </table>
+                {% endfor %}
+            </div>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              {% if pedido %}
+                <input type="button" class="btn btn-sm  btn-primary" value="Adicionar" id="add_more" style="font-size: 17px; margin-right: 20px; background-color: #0d2295; background-color: #0d2295;">
+              {% endif %}
+
+              <div id="empty_form" style="display:none">
+                  <table class='no_error'>
+                      {{ form_items.empty_form.as_table }}
+                  </table>
+              </div>
+
+              <button type="submit" class="btn btn-sm  btn-primary" style="font-size: 17px; padding-left: 20px; padding-right: 20px; "> 
+                {% if pedido%} Atualizar Pedido {% else %} Criar Pedido {% endif %}
+              </button>
+
+              </form>
+            {% if pedido %}
+              <form action="{% url 'deletar_pedido' pk=pedido.pk %}" method="POST" onsubmit="return confirm ('Deseja deletar esse pedido?')">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm  btn-primary" style="font-size: 17px; padding-left: 20px; padding-right: 20px; background-color: red; border-color: red; margin-left: 160px;"> Deletar Pedido </button>
+              </form>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $('#add_more').click(function() {
+        var form_idx = $('#id_itens_pedido-TOTAL_FORMS').val();
+        $('#form_set').append($('#empty_form').html().replace(/__prefix__/g, form_idx));
+        $('#id_itens_pedido-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+    });
+  </script>
+
+  {% include "includes/footer.html" %}
+
+</div>
+
+{% endblock content %}
