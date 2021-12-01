@@ -1,0 +1,81 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+
+{% block title %} Cardápio {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<!-- Header -->
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Page content -->
+<div class="container-fluid mt--6">
+  <div class="row">
+
+    <div class="col-xl-8">
+      <div class="card">
+        <div class="card-header border-0">
+          <div class="row align-items-center">
+            <div class="col">
+              <h3>Lançar pedido</h3>
+              
+            </div>
+            <a href="{% url 'form_pedido' %}" class="btn btn-sm  btn-primary" style="font-size: 20px; padding-left: 20px; padding-right: 20px; "> + </a>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <!-- Projects table -->
+          <table class="table align-items-center table-flush">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">NOME</th>
+                <th scope="col">CATEGORIA</th>
+                <th scope="col">VALOR</th>
+                <th scope="col">STATUS</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for prato in pratos %}
+                  <tr>
+                    <th scope="row">
+                      {{ prato.id }}
+                    </th>
+                    <td>
+                      {{ prato.nome }}
+                    </td>
+                    <td>
+                      {{ prato.categoria }}
+                    </td>
+                    <td>
+                      {{ prato.valor }}
+                    </td>
+                    <td>
+                      {{ prato.get_status_display }}
+                    </td>
+                  </tr>
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% include "includes/footer.html" %}
+
+</div>
+
+{% endblock content %}

@@ -47,7 +47,7 @@ body
     text-align: left;
 
     color: #212529;
-    background-color: #fff;
+    background-color: rgb(255, 255, 255);
 }
 
 [tabindex='-1']:focus:not(:focus-visible)
